@@ -1,4 +1,5 @@
 const fs = require("fs/promises");
+const { array } = require("yargs");
 
 const input = fs.readFile("./input.txt", "utf-8", (err, data) => {
   if (err) {
@@ -8,7 +9,15 @@ const input = fs.readFile("./input.txt", "utf-8", (err, data) => {
 });
 
 function calorieCount(input) {
-  return input.length ? input[0] : 0;
+  if (!input.length) return 0;
+
+  const numArr = input.split(" ");
+  let highestCals = 0;
+
+  for (let i = 0; i < numArr.length; i++) {
+    highestCals += Number(numArr[i]);
+  }
+  return highestCals;
 }
 
 module.exports = calorieCount;
