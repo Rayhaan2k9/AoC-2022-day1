@@ -1,23 +1,33 @@
-const fs = require("fs/promises");
-const { array } = require("yargs");
-
-const input = fs.readFile("./input.txt", "utf-8", (err, data) => {
-  if (err) {
-    console.log(err);
-  }
-  return data;
-});
+const { match } = require("assert");
+const fs = require("fs");
 
 function calorieCount(input) {
   if (!input.length) return 0;
-
-  const numArr = input.split(" ");
-  let highestCals = 0;
-
-  for (let i = 0; i < numArr.length; i++) {
-    highestCals += Number(numArr[i]);
-  }
-  return highestCals;
+  const numArray = input.map((arr) => {
+    for (let i = 0; i < arr.length; i++) {
+      arr[i] = Number(arr[i]);
+    }
+    return arr.reduce((acc, curr) => {
+      return acc + curr;
+    }, 0);
+  });
+  return Math.max(...numArray);
 }
 
-module.exports = calorieCount;
+function topThree(input) {
+  const numArray = input.map((arr) => {
+    for (let i = 0; i < arr.length; i++) {
+      arr[i] = Number(arr[i]);
+    }
+    return arr.reduce((acc, curr) => {
+      return acc + curr;
+    }, 0);
+  });
+  return numArray
+    .sort((a, b) => b - a)
+    .slice(0, 3)
+    .reduce((acc, curr) => {
+      return acc + curr;
+    }, 0);
+}
+module.exports = { calorieCount, topThree };
