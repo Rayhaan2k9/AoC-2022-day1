@@ -8,7 +8,7 @@ const input = fs.readFile("./input.txt", "utf-8", (err, data) => {
 });
 
 function calorieCount(input) {
-  return 0;
+  return input.length ? input[0] : 0;
 }
 
 module.exports = calorieCount;
